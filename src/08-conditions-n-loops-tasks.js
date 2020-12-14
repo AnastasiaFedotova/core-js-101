@@ -122,16 +122,9 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(rect1, rect2) {
-  const h1 = [rect1.top, rect1.height + rect1.top];
-  const w1 = [rect1.left, rect1.width + rect1.left];
-  const h2 = [rect2.top, rect2.height + rect2.top];
-  const w2 = [rect2.left, rect2.width + rect2.left];
-  if ((w2[0] >= w1[0] && w2[0] <= w1[1]) || (h2[0] >= h1[0] && h2[0] <= h1[1])) return true;
-  if ((w2[0] <= w1[0] && w2[1] >= w1[0]) || (h2[0] <= h1[0] && h2[1] >= h1[0])) return true;
-  return false;
+function doRectanglesOverlap(/* rect1, rect2 */) {
+  throw new Error('Not implemented');
 }
-
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.

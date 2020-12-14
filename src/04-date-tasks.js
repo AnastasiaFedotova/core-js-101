@@ -109,18 +109,8 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(date) {
-  // eslint-disable-next-line no-param-reassign
-  date = new Date(date);
-  const hours = date.getHours() % 12;
-  const min = date.getMinutes();
-
-  const hourMinPart = 0.5 * min;
-  const hourHourPart = 30 * hours;
-  const minAngle = 6 * min;
-  const totalAngle = Math.abs(hourMinPart + hourHourPart - minAngle);
-
-  return totalAngle;
+function angleBetweenClockHands(/* date */) {
+  throw new Error('Not implemented');
 }
 
 module.exports = {
