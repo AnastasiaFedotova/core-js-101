@@ -122,8 +122,14 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const h1 = [rect1.top, rect1.height + rect1.top];
+  const w1 = [rect1.left, rect1.width + rect1.left];
+  const h2 = [rect2.top, rect2.height + rect2.top];
+  const w2 = [rect2.left, rect2.width + rect2.left];
+  if ((w2[0] >= w1[0] && w2[0] <= w1[1]) || (h2[0] >= h1[0] && h2[0] <= h1[1])) return true;
+  if ((w2[0] <= w1[0] && w2[1] >= w1[0]) || (h2[0] <= h1[0] && h2[1] >= h1[0])) return true;
+  return false;
 }
 
 
@@ -260,8 +266,25 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let digit; let digits; let flag; let sum; let j; let len;
+  flag = true;
+  sum = 0;
+  // eslint-disable-next-line prefer-const
+  digits = (`${ccn}`).split('').reverse();
+  for (j = 0, len = digits.length; j < len; j += 1) {
+    digit = digits[j];
+    digit = parseInt(digit, 10);
+    // eslint-disable-next-line no-cond-assign
+    if ((flag = !flag)) {
+      digit *= 2;
+    }
+    if (digit > 9) {
+      digit -= 9;
+    }
+    sum += digit;
+  }
+  return sum % 10 === 0;
 }
 
 /**
@@ -316,8 +339,26 @@ function getDigitalRoot(n) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  const map = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+    '<': '>',
+  };
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '(' || str[i] === '{' || str[i] === '[' || str[i] === '<') {
+      stack.push(str[i]);
+    } else {
+      const last = stack.pop();
+      if (str[i] !== map[last]) return false;
+    }
+  }
+  if (stack.length !== 0) return false;
+
+  return true;
 }
 
 
