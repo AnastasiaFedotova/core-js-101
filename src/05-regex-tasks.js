@@ -78,8 +78,9 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(/* minLength */) {
-  throw new Error('Not implemented');
+function getPasswordValidator(minLength) {
+  const str = `^(?=[\\w]*[a-z-9])(?=[\\w]*[A-Z])(?=[a-zA-Z0-9]*[0-9]+)[\\w]{${minLength},}$`;
+  return new RegExp(str);
 }
 
 
