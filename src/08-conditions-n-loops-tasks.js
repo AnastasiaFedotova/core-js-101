@@ -122,8 +122,12 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  if (((rect1.top + rect1.height) < rect2.top)
+  || ((rect2.top + rect2.height) < rect1.top)
+  || ((rect1.left + rect1.width) < rect2.left)
+  || ((rect2.left + rect2.width) < rect1.left)) return false;
+  return true;
 }
 
 /**
@@ -152,8 +156,15 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  // eslint-disable-next-line no-restricted-properties
+  const d = Math.sqrt(Math.pow((point.x - circle.center.x), 2)
+  // eslint-disable-next-line no-restricted-properties
+  + Math.pow((point.y - circle.center.y), 2));
+
+  if (d < circle.radius) return true;
+
+  return false;
 }
 
 
@@ -375,8 +386,8 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -392,8 +403,16 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let str = '';
+  pathes[0].split('').some((elem, index) => {
+    if (pathes.every((arr) => arr[index] === elem)) {
+      str = `${str}${elem}`;
+      return false;
+    }
+    return true;
+  }, '');
+  return str.slice(0, str.lastIndexOf('/') + 1);
 }
 
 
